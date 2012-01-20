@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.summary = desc
   s.description = desc
   s.test_files = `git ls-files spec`.split("\n")
+  s.add_dependency "resque"
   s.add_development_dependency "rspec"
   s.license = "MIT"
 end

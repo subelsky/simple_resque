@@ -22,4 +22,8 @@ module SimpleResque
     name.downcase!
     name
   end
+
+  def resque
+    @resque || Resque
+  end
 end
