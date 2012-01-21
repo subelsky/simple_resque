@@ -2,13 +2,12 @@ require "spork"
 $:.unshift(File.join(File.dirname(__FILE__),"..","lib"))
 
 Spork.prefork do
-  ENV["REDIS_URL"] ||= "http://localhost:6379"
-
   require "rspec"
   require "redis"
   require "resque"
 
-  redis_opts = URI.parse(ENV['REDISTOGO_URL'])
+  redis_url = ENV["REDIS_URL"] || "http://localhost:6379"
+  redis_opts = URI.parse(redis_url)
 
   redis_hash = {
     host: redis_opts.host,

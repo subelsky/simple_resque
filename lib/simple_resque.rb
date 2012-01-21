@@ -7,7 +7,7 @@ module SimpleResque
 
   def push(klass,args)
     queue_name = make_queue_name(klass)
-    @resque.push(queue_name, class: klass, args: args)
+    resque.push(queue_name, class: klass, args: args)
   end
 
   private
