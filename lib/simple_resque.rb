@@ -10,6 +10,16 @@ module SimpleResque
     resque.push(queue_name, class: klass, args: args)
   end
 
+  def pop(klass)
+    queue_name = make_queue_name(klass)
+    resque.pop(queue_name)
+  end
+
+  def size(klass)
+    queue_name = make_queue_name(klass)
+    resque.size(queue_name)
+  end
+
   private
 
   # this code borrowed from active_support's underscore method
