@@ -21,4 +21,9 @@ describe SimpleResque do
     resque_stub.should_receive(:pop).with("generate_fireball").and_return(data)
     SimpleResque.pop("GenerateFireball").should == data
   end
+
+  it "clears the queue" do
+    resque_stub.should_receive(:remove_queue).with("howitzer")
+    SimpleResque.clear("Howitzer")
+  end
 end

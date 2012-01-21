@@ -5,7 +5,7 @@ module SimpleResque
     @resque = r
   end
 
-  def push(klass,args)
+  def push(klass,args = nil)
     queue_name = make_queue_name(klass)
     resque.push(queue_name, class: klass, args: args)
   end
@@ -18,6 +18,11 @@ module SimpleResque
   def size(klass)
     queue_name = make_queue_name(klass)
     resque.size(queue_name)
+  end
+
+  def clear(klass)
+    queue_name = make_queue_name(klass)
+    resque.remove_queue(queue_name)
   end
 
   private

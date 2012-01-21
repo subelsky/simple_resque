@@ -15,17 +15,26 @@ end
 
 describe "Getting queue size from Resque" do
   it "succeeds" do
-    Resque.remove_queue(:buy_stuff)
-    Resque.push(:buy_stuff,class: "BuyStuff", args: [])
-    Resque.push(:buy_stuff,class: "BuyStuff", args: [])
-    SimpleResque.size("BuyStuff").should == 2
+    SimpleResque.clear("BuyStuff")
+
+    expect {
+      SimpleResque.push("BuyStuff")
+      SimpleResque.push("BuyStuff")
+    }.to change { SimpleResque.size("BuyStuff") }.from(0).to(2)
   end
 end
 
 describe "Popping jobs from Resque" do
   it "succeeds" do
-    Resque.remove_queue(:shaz)
-    Resque.push(:shaz,class: "Shaz", args: %q(1 2 3))
+    SimpleResque.clear("BuyStuff")
+    SimpleResque.push("Shaz",%q(1 2 3))
     SimpleResque.pop("Shaz").should == { "class" => "Shaz", "args" => %q(1 2 3) }
+  end
+end
+
+describe "Clearing a Resque queue" do
+  it "succeeds" do
+    Resque.push(:buy_stuff,class: "BuyStuff", args: [])
+    expect { SimpleResque.clear("BuyStuff") }.to change { SimpleResque.size("BuyStuff") }.from(1).to(0)
   end
 end
