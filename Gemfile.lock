@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simple_resque (1.0.1)
+    simple_resque (1.0.2)
       resque
 
 GEM
