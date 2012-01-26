@@ -1,3 +1,5 @@
+require "resque"
+
 module SimpleResque
   extend self
 
