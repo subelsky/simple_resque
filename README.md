@@ -23,10 +23,13 @@ I'll need to add other simplifications of the Resque API.
 
     SimpleResque.push("Transmogrifier",id: 3, state: "back_to_calvin")
 
-# Configuration
+    # These methods are useful in integration/acceptance tests; if you wanted
+    # to use these in production you would be better off using Resque the
+    # conventional way
 
-    SimpleResque.resque = Resque
-    SimpleResque.resque = MyResqueMock # useful for unit testing
+    SimpleResque.size("Transmogrifier") # => 1
+    SimpleResque.pop("Transmogrifier") # => {"class"=>"Transmogrifier", "args"=>{"id"=>3, "state"=>"back_to_calvin"}}
+    SimpleResque.clear("Transmogrifier")
 
 # Problems? Questions?
 
