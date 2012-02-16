@@ -7,7 +7,7 @@ describe SimpleResque do
   before { SimpleResque.resque = resque_stub }
 
   it "creates a proper push request from the given parameters" do
-    resque_stub.should_receive(:push).with("transmogrifier",class: "Transmogrifier",args: { id: 3, state: "back_to_calvin" })
+    resque_stub.should_receive(:push).with("transmogrifier",class: "Transmogrifier",args: [{ id: 3, state: "back_to_calvin" }])
     SimpleResque.push("Transmogrifier",id: 3, state: "back_to_calvin")
   end
 

@@ -4,7 +4,7 @@ require "simple_resque"
 describe "Pushing a job to Resque" do
   it "suceeds" do
     expect {
-      SimpleResque.push("TransformVehicle",[5, "autobot"])
+      SimpleResque.push("TransformVehicle",5, "autobot")
     }.to change { Resque.size(:transform_vehicle) }.from(0).to(1)
 
     job = Resque.pop(:transform_vehicle)
@@ -28,7 +28,7 @@ describe "Popping jobs from Resque" do
   it "succeeds" do
     SimpleResque.clear("BuyStuff")
     SimpleResque.push("Shaz",%q(1 2 3))
-    SimpleResque.pop("Shaz").should == { "class" => "Shaz", "args" => %q(1 2 3) }
+    SimpleResque.pop("Shaz").should == { "class" => "Shaz", "args" => [%q(1 2 3)] }
   end
 end
 
