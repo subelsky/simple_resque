@@ -10,12 +10,18 @@ I had to do this enough times that I decided to wrap the idiom in a gem, figurin
 I'll need to add other simplifications of the Resque API.  The gem assumes that the queue name is an
 underscored version of the class name.
 
-# Installation
+# Setup
 
-    gem install simple_resque
+    ```ruby
+    require "resque"
+    require "simple_resque"
+    Resque.redis = 'localhost:6379'
+    SimpleResque.resque = Resque
+    SimpleResque
 
 # Usage
 
+    ```ruby
     require 'simple_resque'
 
     # puts a job on the "transmogrifier" queue with class "Transmogrifier" and
