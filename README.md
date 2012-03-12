@@ -12,30 +12,32 @@ underscored version of the class name.
 
 # Setup
 
-    ```ruby
-    require "resque"
-    require "simple_resque"
-    Resque.redis = 'localhost:6379'
-    SimpleResque.resque = Resque
-    SimpleResque
+```ruby
+require "resque"
+require "simple_resque"
+Resque.redis = 'localhost:6379'
+SimpleResque.resque = Resque
+SimpleResque
+```
 
 # Usage
 
-    ```ruby
-    require 'simple_resque'
+```ruby
+require 'simple_resque'
 
-    # puts a job on the "transmogrifier" queue with class "Transmogrifier" and
-    # arguments { id: 3, state: "back_to_calvin" }
+# puts a job on the "transmogrifier" queue with class "Transmogrifier" and
+# arguments { id: 3, state: "back_to_calvin" }
 
-    SimpleResque.push("Transmogrifier",id: 3, state: "back_to_calvin")
+SimpleResque.push("Transmogrifier",id: 3, state: "back_to_calvin")
 
-    # These methods are useful in integration/acceptance tests; if you wanted
-    # to use these in production you would be better off using Resque the
-    # conventional way
+# These methods are useful in integration/acceptance tests; if you wanted
+# to use these in production you would be better off using Resque the
+# conventional way
 
-    SimpleResque.size("Transmogrifier") # => 1
-    SimpleResque.pop("Transmogrifier") # => {"class"=>"Transmogrifier", "args"=>{"id"=>3, "state"=>"back_to_calvin"}}
-    SimpleResque.clear("Transmogrifier")
+SimpleResque.size("Transmogrifier") # => 1
+SimpleResque.pop("Transmogrifier") # => {"class"=>"Transmogrifier", "args"=>{"id"=>3, "state"=>"back_to_calvin"}}
+SimpleResque.clear("Transmogrifier")
+```
 
 # Problems? Questions?
 
